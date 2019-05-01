@@ -15,8 +15,7 @@ html{
     height:100%;
 }
 body{
-    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
-    height: 100%;
+    background-color: #cfd3d6;
 }
 
 #content{
@@ -26,4 +25,49 @@ body{
 
 #search-gap{
     margin-bottom: 100px;
+}
+
+.column-one{
+    background-color:yellow;
+}
+
+.column-two{
+    background-color:green;
+}
+
+.content{
+    background-color: #dee1e3;
+    border: 1px solid #202d4c;
+    margin: 0px 5px 20px 5px;
+    padding: 0px 15px;
+}
+
+.navbar{
+    background-color: #f8f9f9;
+}
+
+.post{
+    background-color: #f8f9f9;
+    height: 100%;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+li i{
+    font-size: 30px;
+}
+
+hr {
+    width:95%;
+    float: left;
+}
+
+.vertical-line{
+    border-left: 6px solid green;
+    height: 100%;
 }
