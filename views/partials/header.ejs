@@ -20,15 +20,32 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <% if(!currentUser){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register" tabindex="-1" aria-disabled="true">Register</a>
+                        </li>
+                    <% } else { %>
+                        <li class="mr-3">Signed In: <%= currentUser.username%></li>
+                        <li><a href="/logout">Logout</a></li>
+                    <% } %>
                 
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/register" tabindex="-1" aria-disabled="true">Register</a>
-                </li>
                 </ul>
                 
             </div>
         </nav>
+        <div class="container pt-2">
+            <% if(error && error.length >0){ %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+            <% } %>
+            <% if(success && success.length >0){ %>
+            <div class="alert alert-success">
+                <%= success %>
+            </div>
+            <% } %>
+        </div>
        
