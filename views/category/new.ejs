@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="content post pt-3">
+        <form action="/l/new" method="POST">
+            <div class="form-group">
+                <label for="category[name]">Community Name</label>
+                <input type="text" class="form-control" name="category[name]"  placeholder="Enter Category Name">
+                <small class="form-text text-muted">It is caps sensitive</small>
+            </div>
+            <div class="form-group">
+                <label for="category[description]">Community Description</label> <br>
+                <textarea id="category[description]" name="category[description]" rows="5" cols="33" class="full-content">Community Description
+                </textarea>
+            </div>
+            
+            <div class="form-group">
+                <input type="radio" name="category[access]" value="public" checked="true">
+                <span>
+                    Public
+                    <small class="text-muted">(This allows everyone to view and post)</small>
+                </span>
+                <br>
+                <input type="radio" name="category[access]" value="restricted">
+                <span>
+                    Restricted
+                    <small class="text-muted">(Users can view and reply but can't post)</small>
+                </span>
+                <br>
+                <input type="radio" name="category[access]" value="private">
+                <span>
+                    Private
+                    <small class="text-muted">(Only selected users access the category)</small>
+                </span>
+            </div>
+            
+            <div class="form-group">
+                    <button type="submit" class="btn btn-primary mb-2 full-content">CREATE COMMUNITY</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+<% include ../partials/footer %>

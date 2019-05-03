@@ -71,3 +71,23 @@ hr {
     border-left: 6px solid green;
     height: 100%;
 }
+
+.full-content{
+    width: 100%;
+}
+
+.tabContent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+#text{
+    display: block;
+}
+
+li form button{
+    outline:0;
+    background-color: transparent;
+    border:0;
+}
