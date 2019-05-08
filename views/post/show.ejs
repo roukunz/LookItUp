@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-<div class="container pt-5">
+<div class="container">
     <div class="row">
         <div class="col-md-10 pl-2 pr-2 pb-2 post">
             <div class="row">
@@ -11,7 +11,7 @@
                     </ul>
                 </div>
                 <div class="col-md-11">
-                    <small>post by user</small><small class="text-muted"> 5 months ago</small>
+                    <small>post by <%= post.author.username %></small><small class="text-muted"> <span id="date0"> 10 minutes</span><script>timeDifference('<%= post.date%>', '0')</script> ago</small>
                     <h1>Title of the post</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 

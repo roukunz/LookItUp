@@ -1,4 +1,5 @@
 var express = require("express");
+var mongoose = require("mongoose");
 var router = express.Router({mergeParams: true});
 var Category = require("../models/category");
 var Post = require("../models/post");
@@ -17,14 +18,15 @@ router.post('/', middleware.isLoggedIn, function(req,res){
         if(err){
             console.log(err);
         }
+
+        console.log("here");
         Post.create(req.body.post,function(err,post){
             post.author.id = req.user._id;
             post.author.username = req.user.username;
-            post.rating = 0;
-            post.date = new Date();
-
             post.save();
 
+            post.date = new Date();
+            
             category.post.push(post);
             category.save();
 
@@ -37,26 +39,120 @@ router.post('/:title/like', middleware.isLoggedIn, function(req,res){
     User.findOne({username: req.user.username},function(err,user){
         Post.findOne({title: req.params.title}, function(err ,post){
             var found;
-            user.ratedPost.every(function(u){
-               
-                if(u._id.toString() === post._id.toString()){
-                    res.redirect("/l/"+req.params.id);
+            post.dislike.every(function(d,i){
+                if(user._id.toString() == d._id.toString()){
                     found = true;
-                    console.log("here");
+                    user.ratedPost.every(function(r,y){
+                        console.log(r.post._id);
+                        if(r.post._id.toString() == post._id.toString()){
+                            
+                            user.ratedPost.splice(y,1);
+                            user.save();
+                        }
+                    })
+                    post.dislike.splice(i,1);
+                    post.save();
+                    res.redirect("back");
                     return false;
                 }
                 return true;
             })
+
             if(!found){
-                post.rating += 1;
+                post.rating.every(function(p){
+                    if(user._id.toString() == p._id.toString()){
+                        res.redirect("/l/"+req.params.id);
+                        found = true;
+                        return false;
+                    }
+                    return true;
+                })
+            }
+
+            if(!found){    
+                var dataSend = {
+                    post: post, 
+                    like: true
+                }
+                user.ratedPost.push(dataSend);
+                post.rating.push(req.user._id);
                 post.save();
-    
-                user.ratedPost.push(post);
                 user.save();
                 res.redirect("back");
             }
+            
+
         })
     })
-    
+})
+
+router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
+    var found = false;
+    //check if they like
+    User.findOne({username: req.user.username},function(err,user){
+        Post.findOne({title: req.params.title}, function(err ,post){
+            
+
+            post.rating.every(function(p,i){
+                if(user._id.toString() == p._id.toString()){
+                    //if they do, delete their like
+                    user.ratedPost.every(function(r,y){
+                        if(r.post._id.toString() == post._id.toString()){
+                            user.ratedPost.splice(y,1);
+                            user.save();
+                            console.log(user.ratedPost[y]);
+                        }
+                    })
+
+                    post.rating.splice(i,1);
+                    post.save();
+
+                  
+                    found = true;
+                    res.redirect("back");
+                    return false;
+                }
+                return true;
+            })
+              //if they click again, or they didnt rate yet, dislike
+            if(!found){
+                post.dislike.every(function(d){
+                  
+                    if(user._id.toString() == d._id.toString()){
+                        found = true;
+                        console.log("here");
+                        res.redirect("back");
+                        return false;
+                    }
+                    return true;
+                })
+            }
+
+            if(!found){
+                var dataSend = {
+                    post: post, 
+                    like: false
+                }
+                user.ratedPost.push(dataSend);
+                user.save();
+                post.dislike.push(user._id);
+                post.save();
+                res.redirect('back');
+            }
+            
+            })
+        })
+    })
+
+router.get("/:title", function(req,res){
+    Post.findOne({title: req.params.title}, function(err,post){
+        if(req.user){
+            User.findOne({username: req.user.username}, function(err,user){
+                res.render("post/show", {post: post, user: user});
+            })
+        } else {
+            res.render("post/show", {post: post});
+        }
+    })
 })
 module.exports = router;

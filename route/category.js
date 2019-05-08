@@ -4,6 +4,7 @@ var passport = require("passport");
 var middleware = require("../middleware/index");
 
 var Category = require("../models/category");
+var User = require("../models/user")
 
 router.get('/new',middleware.isLoggedIn,function(req,res){
     res.render("category/new");
@@ -27,7 +28,14 @@ router.post('/new', middleware.isLoggedIn, function(req,res){
 
 router.get('/:id', function(req,res){
     Category.findOne({name: req.params.id}).populate("post").exec(function(err,category){
+        if(req.user){
+            User.findOne({username: req.user.username}, function(err, user){
+
+                res.render("category/show", {category: category, user_rate: user.ratedPost})
+            })
+        } else {
             res.render("category/show",{category: category});
+        }
     })
 })
 module.exports = router;

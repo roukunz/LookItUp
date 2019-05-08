@@ -15,6 +15,7 @@ function timeDifference(fromdate, id) {
   var date = new Date(fromdate);
   var diff = new Date().getTime() - date.getTime();	
   console.log("ToDate : " + new Date());
+  console.log(fromdate);
   console.log("From Date: " + date);
   console.log("difference : " + diff );
   var divideBy;

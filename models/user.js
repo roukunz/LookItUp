@@ -17,13 +17,15 @@ var UserSchema = new mongoose.Schema({
         post: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post"
-        }
+        }, 
+        like: Boolean
     }],
     ratedComment: [{
         comment: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Comment"
-        }
+        },
+        like: Boolean
     }],
     subscribed:[{
         type: mongoose.Schema.Types.ObjectId,

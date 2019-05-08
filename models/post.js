@@ -10,7 +10,18 @@ var postSchema = new mongoose.Schema({
         },
         username: String
     },
-    rating: Number,
+    rating: [{
+        user_id:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    }],
+    dislike: [{
+        user_id:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    }],     
     date: Date
 })
 

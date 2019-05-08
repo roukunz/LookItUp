@@ -91,3 +91,7 @@ li form button{
     background-color: transparent;
     border:0;
 }
+
+.invis{
+    color: transparent;
+}

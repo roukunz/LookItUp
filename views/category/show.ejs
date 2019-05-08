@@ -1,3 +1,4 @@
+
 <% include ../partials/header %>
 
 
@@ -10,15 +11,51 @@
                     <div class="row">
                         <div class="col-sm-1">
                             <ul>
-                                <li><form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form></a></li>
-                                <li id="rating<%= category.post[i].title%>"><%= category.post[i].rating %></li>
-                                <li><i class="fas fa-caret-down"></i></li>
+                                <li>
+                                    <% if(currentUser){ %>
+                                        <% var found; %>
+                                        <% for(var y = 0; y < user_rate.length; y++){ %>
+                                            <% if(user_rate[y].post._id.toString() == category.post[i]._id.toString()){ %>
+                                                    <% if(user_rate[y].like){ %>
+                                                        <i class="fas fa-circle"></i> 
+                                                        <% found = true; %>
+                                                    <% } %>
+                                            <% } %>
+                                        <% } %>
+                                        <% if(!found){ %>
+                                            <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                         <% } %>
+                                    <% } else { %>
+                                        <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                    <% } %>
+                                  
+                                    
+                                </li>
+                                <li id="rating<%= category.post[i].title%>"><%= (category.post[i].rating.length - category.post[i].dislike.length) %></li>
+                                <li>
+                                <% if(currentUser){ %>
+                                    <% var found = false; %>
+                                    <% for(var y = 0; y < user_rate.length; y++){ %>
+                                        <% if(user_rate[y].post._id.toString() == category.post[i]._id.toString()){ %>
+                                                <% if(!user_rate[y].like){ found = true; %>
+                                                    <i class="fas fa-circle"></i> 
+                                                <% } %>
+                                        <% } %>
+                                    <% } %>
+                                    <% if(!found){ %>
+                                        <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                     <% } %>
+                                <% } else { %>
+                                    <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                <% } %>
+                            </li>
                             </ul>
                         </div>
                         <div class="col-sm-11 post">
                             <p>posted by <%= category.post[i].author.username %> <span id="date<%= i%>"> 10 minutes</span><script>timeDifference('<%= category.post[i].date%>', '<%= i %>')</script> ago</p>
                             <h1><%= category.post[i].title%></h1>
                             <p><%= category.post[i].content%></p>
+                            <a href="/l/<%= category.name%>/post/<%= category.post[i].title%>">Comment</a>
                         </div>
                     </div>
                 </div>
@@ -28,7 +65,7 @@
             <div class="hidden-sm col-md-3">
                 <div class=" content pl-0 pr-0">
                     <div class="post pl-2 pr-2 pt-2 pb-2">
-                        <h5>/l/<%= category.name%></h5>
+                        <h5>/l/<%= category.name %></h5>
                         <p><%= category.description %></p>
                         <a href="/l/<%= category.name%>/post/new"><button type="submit" class="btn btn-primary mb-2 full-content">CREATE POST</button></a>
                     </div>
