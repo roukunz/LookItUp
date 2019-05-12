@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var postSchema = new mongoose.Schema({
     title: String,
@@ -22,7 +23,13 @@ var postSchema = new mongoose.Schema({
             ref:"User"
         }
     }],     
-    date: Date
+    date: Date,
+    comment: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment"
+    }]
 })
 
+
+postSchema.plugin(deepPopulate);
 module.exports = mongoose.model("Post",postSchema);

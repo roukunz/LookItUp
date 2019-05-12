@@ -95,3 +95,11 @@ li form button{
 .invis{
     color: transparent;
 }
+
+.reply{
+    border-left: 3px black solid;
+}
+
+.uniqueForm{
+    float:left;
+}

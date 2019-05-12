@@ -55,8 +55,15 @@ router.get('/logout', function(req,res){
 })
 
 router.post('/search', function(req,res){
+    var found = false;
     Category.findOne({name: req.body.search} ,function(err,category){
-        res.redirect('/l/' + category.name);
-    })
+        console.log(category);
+        if(category){
+            res.redirect('/l/' + category.name.toLowerCase());
+        }
+    }) 
+    if(!found){
+        res.redirect('/l/new');
+    }
 })
 module.exports = router;

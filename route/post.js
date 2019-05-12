@@ -5,6 +5,8 @@ var Category = require("../models/category");
 var Post = require("../models/post");
 var middleware = require("../middleware/index");
 var User = require("../models/user")
+var Comment = require("../models/comment");
+var Reply = require("../models/reply");
 
 router.get('/new', middleware.isLoggedIn, function(req,res){
     Category.findOne({name:req.params.id}, function(err,category){
@@ -18,15 +20,13 @@ router.post('/', middleware.isLoggedIn, function(req,res){
         if(err){
             console.log(err);
         }
-
-        console.log("here");
         Post.create(req.body.post,function(err,post){
             post.author.id = req.user._id;
             post.author.username = req.user.username;
             post.save();
 
             post.date = new Date();
-            
+
             category.post.push(post);
             category.save();
 
@@ -145,14 +145,66 @@ router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
     })
 
 router.get("/:title", function(req,res){
-    Post.findOne({title: req.params.title}, function(err,post){
-        if(req.user){
-            User.findOne({username: req.user.username}, function(err,user){
-                res.render("post/show", {post: post, user: user});
-            })
+    Category.findOne({name: req.params.id}, function(err,category){
+        Post.findOne({title: req.params.title}).populate({
+            path: 'comment',
+            model: 'Comment',
+            populate:{path: 'reply', model:"Reply"}  
+        }).exec(function(err,post){
+            if(req.user){
+                User.findOne({username: req.user.username}).exec(function(err,user){
+                    console.log(user._id);
+                    console.log(post.author.id);
+                    res.render("post/show", {post: post, user: user, user_rate: user.ratedPost, user_comment_rate: user.ratedComment, category: category});
+                })
+            } else {
+                res.render("post/show", {post: post, category: category});
+            }
+        }) 
+    })
+})
+
+router.get('/:title/edit', middleware.isLoggedIn, function(req,res){
+    Category.findOne({name: req.params.id}, function(err,category){
+        Post.findOne({title: req.params.title}, function(err,post){
+
+            res.render("post/edit", {post: post, category: category});
+        })
+    })
+   
+})
+
+router.put('/:title', middleware.checkPostAuthor, function(req,res){
+    Post.findOne({title: req.params.title}, function(err, post){
+        if(err){
+            console.log(err);
         } else {
-            res.render("post/show", {post: post});
+            post.title = req.body.title;
+            post.content = req.body.content;
+            post.save();
+            res.redirect("/l/" + req.params.id+ "/post/" + req.params.title);
         }
     })
+})
+
+router.delete("/:title", middleware.checkPostAuthor, function(req,res){
+    Post.findOne({title: req.params.title}).populate({path: 'comment',
+    model: 'Comment',
+    populate:{path: 'reply', model:"Reply"}  }).exec( function(err,post){
+        for(var i = 0; i < post.comment.length; i++){
+            for(var y = 0; y < post.comment[i].reply.length; y++){
+                Reply.remove({_id: post.comment[i].reply[y]._id}, function(err,removed){
+                    if(err){
+                        console.log(err);
+                    }
+                });
+            }
+            Comment.remove({_id: post.comment[i]._id}, function(err,removed){});
+        }
+        Post.remove({_id: post._id}, function(err,removed){});
+    })
+
+    res.redirect("/l/"+ req.params.id);
+
 })
 module.exports = router;

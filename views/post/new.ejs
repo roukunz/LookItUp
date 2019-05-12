@@ -5,13 +5,13 @@
             <div class="col-md-4">
                 <button type="submit" class="btn btn-primary mb-2 full-content tablink active" onclick="openPostTab(event, 'text')">Text</button>
             </div>
-
-            <div class="col-md-4">
+            <!-- currently work in progress -->
+            <!-- <div class="col-md-4">
                 <button type="submit" class="btn btn-primary mb-2 full-content tablink" onclick="openPostTab(event, 'image')">Image</button>
             </div>      
             <div class="col-md-4">
                 <button type="submit" class="btn btn-primary mb-2 full-content tablink" onclick="openPostTab(event, 'link')">Link</button>
-            </div>
+            </div> -->
         </div>
         <div id="text" class="tabContent">
             <form action="/l/<%= category_name%>/post/" method="POST">
@@ -31,7 +31,8 @@
             </form>
         </div>
 
-        <div id="image" class="tabContent">
+        <!-- currently work in progress -->
+        <!-- <div id="image" class="tabContent">
             <form action="/l/<%= category_name%>/post/" method="POST">
                 <div class="form-group">
                     <label for="post[title]">Image</label>
@@ -65,7 +66,7 @@
                 </div>
 
             </form>
-        </div>
+        </div> -->
     </div>
 </div>
 <% include ../partials/footer %>

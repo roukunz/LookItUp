@@ -16,6 +16,7 @@ router.post('/new', middleware.isLoggedIn, function(req,res){
             console.log(err);
             res.redirect("/");
         }
+        category.name = category.name.toLowerCase();
 
         category.creator.id = req.user._id;
         category.creator.username = req.user.username;
@@ -28,6 +29,7 @@ router.post('/new', middleware.isLoggedIn, function(req,res){
 
 router.get('/:id', function(req,res){
     Category.findOne({name: req.params.id}).populate("post").exec(function(err,category){
+        
         if(req.user){
             User.findOne({username: req.user.username}, function(err, user){
 

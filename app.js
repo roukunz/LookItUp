@@ -17,6 +17,7 @@ var app = express();
 var indexRoute = require("./route/index");
 var categoryRoute = require("./route/category");
 var postRoute = require("./route/post");
+var commentRoute = require("./route/comment");
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
@@ -49,6 +50,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use("/l", categoryRoute);
 app.use("/l/:id/post", postRoute);
+app.use("/l/:id/post/:title/comment", commentRoute),
 app.use(indexRoute);
 
 app.listen(3000, '0.0.0.0', function(){

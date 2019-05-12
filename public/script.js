@@ -53,4 +53,21 @@ function timeDifference(fromdate, id) {
   }
   $("#date"+id).text(Math.floor( Math.floor(parseFloat(diff)/ parseFloat(divideBy))) + textDisplay);
 }
-
+var replyID = "";
+function showDiv(elementID){
+  if(replyID.toString() == elementID.toString()){
+    $("#"+replyID).css("display", "none");
+    replyID = "";
+  } else {
+    if(replyID == ""){
+      $("#"+elementID).css("display", "block");
+      replyID = elementID;
+    } else {
+      $("#"+replyID).css("display", "none");
+      replyID = elementID;
+      $("#"+elementID).css("display", "block");
+    }
+  }
+  
+ 
+}
