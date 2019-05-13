@@ -5,56 +5,6 @@
     <div class="modal-body row">
         <div class="col-md-9">
            
-            <% for(var i = 0; i < topPost.length; i++){ %>
-                <div class=" content">
-                        <div class="row">
-                            <div class="col-sm-1">
-                                    <ul>
-                                        <li>
-                                            <% if(currentUser){ %>
-                                                <% var found; %>
-                                                <% for(var y = 0; y < user.ratedPost.length; y++){ %>
-                                                    <% if(user.ratedPost[y].post._id.toString() == topPost[i]._id.toString()){ %>
-                                                            <% if(user.ratedPost[y].like){ %>
-                                                                <i class="fas fa-circle"></i> 
-                                                                <% found = true; %>
-                                                            <% } %>
-                                                    <% } %>
-                                                <% } %>
-                                                <% if(!found){ %>
-                                                    <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
-                                                    <% } %>
-                                            <% } else { %>
-                                                <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
-                                            <% } %>
-                                        </li>
-                                        <li>
-                                        <% if(currentUser){ %>
-                                            <% var found = false; %>
-                                            <% for(var y = 0; y < user.ratedPost.length; y++){ %>
-                                                <% if(user.ratedPost[y].post._id.toString() == topPost[i]._id.toString()){ %>
-                                                        <% if(!user.ratedPost[y].like){ found = true; %>
-                                                            <i class="fas fa-circle"></i> 
-                                                        <% } %>
-                                                <% } %>
-                                            <% } %>
-                                            <% if(!found){ %>
-                                                <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
-                                                <% } %>
-                                        <% } else { %>
-                                            <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
-                                        <% } %>
-                                    </li>
-                                    </ul>
-                        </div>
-                        <div class="col-sm-11 post">
-                            <p>posted by <%= topPost[i].author.username%> 4 hours ago</p>
-                            <h1><%= topPost[i].title %></h1>
-                            <p><%= topPost[i].content %></p>
-                        </div>
-                    </div>
-            <% } %>
-            
             
             </div> 
         </div>
