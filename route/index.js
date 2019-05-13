@@ -8,7 +8,7 @@ var Post = require("../models/post");
 router.get('/', function(req,res){
     var lastFound;
     var newPost = [];
-    Post.find({}, function(err, post){
+    Post.find({}).populate("category").exec( function(err, post){
         for(var i = 0; i < post.length; i++){
             if(newPost.length <= 5){
                 newPost.push(post[i]);
