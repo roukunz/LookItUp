@@ -32,6 +32,7 @@ router.get('/', function(req,res){
             res.render("index", {topPost: newPost, user: user});
         })
     } else {
+        console.log(newPost.length);
         res.render("index", {topPost: newPost});
     }
 })
