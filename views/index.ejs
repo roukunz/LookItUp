@@ -49,7 +49,7 @@
                             </ul>
                         </div>
                         <div class="col-sm-11 post">
-                            <p>posted by <%= topPost[i].author.username%>   <span id="date<%= i%>">    10 minutes</span><script>timeDifference('<%= topPost[i].date%>', '<%= i %>')</script> ago  <small class="text-muted"> /l/<%= topPost[i].category.name%></small></small></p>
+                            <p>posted by <%= topPost[i].author.username%>   <span id="date<%= i%>">    10 minutes</span><script>timeDifference('<%= topPost[i].date%>', '<%= i %>')</script> ago  <a href="/l/<%= topPost[i].category.name%>"><small class="text-muted"> /l/<%= topPost[i].category.name%></small></small></a></p>
                             <h1><%= topPost[i].title %></h1>
                             <p><%= topPost[i].content %></p>
                             <a href="/l/<%= topPost[i].category.name%>/post/<%= topPost[i].title%>">Comment</a>
