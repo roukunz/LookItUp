@@ -24,6 +24,7 @@ router.get('/', function(req,res){
                 }
             }  
         }
+        console.log(newPost);
     })
 
     if(req.user){
