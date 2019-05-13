@@ -53,6 +53,8 @@ app.use("/l/:id/post", postRoute);
 app.use("/l/:id/post/:title/comment", commentRoute),
 app.use(indexRoute);
 
-app.listen(3000, '0.0.0.0', function(){
+const port = process.env.PORT;
+const ip = process.env.IP;
+app.listen(port,ip,function(){
     console.log("Server has started ....");
-})
+});
