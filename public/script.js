@@ -68,6 +68,16 @@ function showDiv(elementID){
       $("#"+elementID).css("display", "block");
     }
   }
-  
- 
+}
+function onTextChange(id) {
+  var key = window.event.keyCode;
+
+  // If the user has pressed enter
+  if (key === 13) {
+      document.getElementById(id).value = document.getElementById("txtArea").value + "\n*";
+      return false;
+  }
+  else {
+      return true;
+  }
 }
