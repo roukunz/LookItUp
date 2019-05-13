@@ -25,16 +25,15 @@ router.get('/', function(req,res){
             }  
         }
         console.log(newPost);
+        if(req.user){
+            User.findOne({_id: req.user.id}, function(err,user){
+                res.render("index", {topPost: newPost, user: user});
+            })
+        } else {
+            console.log(newPost.length);
+            res.render("index", {topPost: newPost});
+        }
     })
-
-    if(req.user){
-        User.findOne({_id: req.user.id}, function(err,user){
-            res.render("index", {topPost: newPost, user: user});
-        })
-    } else {
-        console.log(newPost.length);
-        res.render("index", {topPost: newPost});
-    }
 })
 
 router.get('/login', function(req,res){
