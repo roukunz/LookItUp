@@ -9,7 +9,7 @@ var express = require("express"),
     Category = require("./models/category");
 
 
-mongoose.connect("mongodb+srv://roukunz:<password>@lookitupcluster-heluz.mongodb.net/test?retryWrites=true", function(err){
+mongoose.connect("mongodb+srv://roukunz:Shikamaru123@lookitupcluster-heluz.mongodb.net/test?retryWrites=true", function(err){
     if(err){
         console.log(err.message);
     } else {
