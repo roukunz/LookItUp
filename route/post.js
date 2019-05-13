@@ -23,6 +23,7 @@ router.post('/', middleware.isLoggedIn, function(req,res){
         Post.create(req.body.post,function(err,post){
             post.author.id = req.user._id;
             post.author.username = req.user.username;
+            post.category = category;
             post.save();
 
             post.date = new Date();

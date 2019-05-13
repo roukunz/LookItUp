@@ -4,22 +4,60 @@
     
     <div class="modal-body row">
         <div class="col-md-9">
-            <div class=" content">
-                <div class="row">
-                    <div class="col-sm-1">
-                        <ul>
-                            <li><i class="fas fa-caret-up"></i></li>
-                            <li>100</li>
-                            <li><i class="fas fa-caret-down"></i></li>
-                        </ul>
+            <% for(var i = 0; i < topPost.length; i++){ %>
+                <div class=" content">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <ul>
+                                    <li>
+                                        <% if(currentUser){ %>
+                                            <% var found; %>
+                                            <% for(var y = 0; y < user_rate.length; y++){ %>
+                                                <% if(user_rate[y].post._id.toString() == topPost[i]._id.toString()){ %>
+                                                        <% if(user_rate[y].like){ %>
+                                                            <i class="fas fa-circle"></i> 
+                                                            <% found = true; %>
+                                                        <% } %>
+                                                <% } %>
+                                            <% } %>
+                                            <% if(!found){ %>
+                                                <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                             <% } %>
+                                        <% } else { %>
+                                            <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                        <% } %>
+                                      
+                                        
+                                    </li>
+                                    <li id="rating<%= category.post[i].title%>"><%= (topPost[i].rating.length - topPost[i].dislike.length) %></li>
+                                    <li>
+                                    <% if(currentUser){ %>
+                                        <% var found = false; %>
+                                        <% for(var y = 0; y < user_rate.length; y++){ %>
+                                            <% if(user_rate[y].post._id.toString() == topPost[i]._id.toString()){ %>
+                                                    <% if(!user_rate[y].like){ found = true; %>
+                                                        <i class="fas fa-circle"></i> 
+                                                    <% } %>
+                                            <% } %>
+                                        <% } %>
+                                        <% if(!found){ %>
+                                            <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                         <% } %>
+                                    <% } else { %>
+                                        <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                    <% } %>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-11 post">
+                                <p>posted by <%= topPost[i].author.username%> 4 hours ago</p>
+                                <h1><%= topPost[i].title %></h1>
+                                <p><%= topPost[i].content %></p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-11 post">
-                        <p>posted by user 4 hours ago</p>
-                        <h1>This is the title of the post</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
-            </div>
+            <% } %>
+            
             
             <div class=" content">
                     <div class="row">
