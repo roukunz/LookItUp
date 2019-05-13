@@ -22,9 +22,15 @@ router.get('/', function(req,res){
                     }
                 }
             }
+            if(req.user){
+                User.findOne({_id: req.user.id}, function(err,user){
+                    res.render("index", {topPost: newPost, user: user});
+                })
+            } else {
+                res.render("index", {topPost: newPost});
+            }
         }
     })
-    res.render("index");
 })
 
 router.get('/login', function(req,res){
