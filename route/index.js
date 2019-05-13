@@ -8,32 +8,32 @@ router.get('/', function(req,res){
     Category.find({},function(err,category){
         Post.find({}, function(err,post){
             var postNew = [];
-            for(var i = 0; i < post.length; i++){
-                if(postNew.length <= 5){
-                    postNew.push(post);
-                } else {
-                    if(post[i].rating.length > postNew[postNew.length-1]){
-                        var lastFound;
-                        for(var y = postNew.length - 1; y < postNew.length; y++){
-                            if(post[i].rating.length > postNew[y]){
-                                lastFound = y;
-                            }
-                        }
-                        var postHolder;
-                        var temp;
-                        postHolder = postNew[lastFound];
-                        postNew[lastFound] = post[i];
+            // for(var i = 0; i < post.length; i++){
+            //     if(postNew.length <= 5){
+            //         postNew.push(post);
+            //     } else {
+            //         if(post[i].rating.length > postNew[postNew.length-1]){
+            //             var lastFound;
+            //             for(var y = postNew.length - 1; y < postNew.length; y++){
+            //                 if(post[i].rating.length > postNew[y]){
+            //                     lastFound = y;
+            //                 }
+            //             }
+            //             var postHolder;
+            //             var temp;
+            //             postHolder = postNew[lastFound];
+            //             postNew[lastFound] = post[i];
 
-                        for(var y = lastFound+1; y < postNew.length; y++){
-                            temp = postNew[y];
-                            postNew[y] = postHolder;
-                            postHolder = temp;
-                        }
-                    }
-                }
-            }
+            //             for(var y = lastFound+1; y < postNew.length; y++){
+            //                 temp = postNew[y];
+            //                 postNew[y] = postHolder;
+            //                 postHolder = temp;
+            //             }
+            //         }
+            //     }
+            // }
 
-            res.render("index", {category: category, topPost: postNew});
+            res.render("index", {category: category, topPost: post});
         })
     })
 })
