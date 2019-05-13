@@ -7,7 +7,22 @@ var Post = require("../models/post");
 
 router.get('/', function(req,res){
     Post.find({}, function(err, post){
-        console.log(post.length);
+        var newPost = [];
+        for(var i = 0; i < post.length; i++){
+            if(newPost.length <= 5){
+                newPost.push(post[i]);
+            } else {
+                var lastFound = post[i];
+                var temp;
+                for(var y = 0; y < newPost.length; y++){
+                    if(post[i].rating.length > newPost[y].rating.length){
+                        temp = newPost[y];
+                        newPost[y] = lastFound;
+                        lastFound = temp;
+                    }
+                }
+            }
+        }
     })
     res.render("index");
 })
