@@ -6,13 +6,15 @@ var Category = require("../models/category");
 var Post = require("../models/post");
 
 router.get('/', function(req,res){
+    var lastFound;
+    var newPost;
     Post.find({}, function(err, post){
-        var newPost = [];
+        newPost = [];
         for(var i = 0; i < post.length; i++){
             if(newPost.length <= 5){
                 newPost.push(post[i]);
             } else {
-                var lastFound = post[i];
+                lastFound = post[i];
                 var temp;
                 for(var y = 0; y < newPost.length; y++){
                     if(post[i].rating.length > newPost[y].rating.length){
@@ -21,16 +23,17 @@ router.get('/', function(req,res){
                         lastFound = temp;
                     }
                 }
-            }
-            if(req.user){
-                User.findOne({_id: req.user.id}, function(err,user){
-                    res.render("index", {topPost: newPost, user: user});
-                })
-            } else {
-                res.render("index", {topPost: newPost});
-            }
+            }  
         }
     })
+
+    if(req.user){
+        User.findOne({_id: req.user.id}, function(err,user){
+            res.render("index", {topPost: newPost, user: user});
+        })
+    } else {
+        res.render("index", {topPost: newPost});
+    }
 })
 
 router.get('/login', function(req,res){
