@@ -28,6 +28,7 @@
                                         <form action="/l/<%= topPost[i].category.name%>/post/<%= topPost[i].title%>/dislike" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                                     <% } %>
                                 </li>
+                                <li><%= (topPost[i].rating.length - topPost[i].dislike.length) %></li>
                                 <li>
                                 <% if(currentUser){ %>
                                     <% var found = false; %>
@@ -48,7 +49,7 @@
                             </ul>
                         </div>
                         <div class="col-sm-11 post">
-                            <p>posted by <%= topPost[i].author.username%> 4 hours ago</p>
+                            <p>posted by <%= topPost[i].author.username%> <span id="date<%= i%>"> 10 minutes</span><script>timeDifference('<%= topPost[i].date%>', '<%= i %>')</script> ago  <small class="text-muted"><%= topPost[i].category.name%></small></small></p>
                             <h1><%= topPost[i].title %></h1>
                             <p><%= topPost[i].content %></p>
                         </div>
