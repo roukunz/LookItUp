@@ -88,12 +88,11 @@ router.post('/search', function(req,res){
         console.log("found search: " +category);
         if(category){
             res.redirect('/l/' + category.name.toLowerCase());
+        } else {
+            res.redirect('/l/new');
         }
         found = true;
-    }) 
-    if(!found){
-        res.redirect('/l/new');
-    }
+    })
 })
 
 router.get('*', function(req,res){
