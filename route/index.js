@@ -89,6 +89,7 @@ router.post('/search', function(req,res){
         if(category){
             res.redirect('/l/' + category.name.toLowerCase());
         }
+        found = true;
     }) 
     if(!found){
         res.redirect('/l/new');
