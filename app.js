@@ -9,7 +9,13 @@ var express = require("express"),
     Category = require("./models/category");
 
 
-mongoose.connect("mongodb://localhost/lookitup", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://roukunz:<password>@lookitupcluster-heluz.mongodb.net/test?retryWrites=true", function(err){
+    if(err){
+        console.log(err.message);
+    } else {
+        console.log("connected to mongoose");
+    }
+});
 
 var app = express();
 
