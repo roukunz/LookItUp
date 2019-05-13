@@ -7,9 +7,8 @@ var Post = require("../models/post");
 
 router.get('/', function(req,res){
     var lastFound;
-    var newPost;
+    var newPost = [];
     Post.find({}, function(err, post){
-        newPost = [];
         for(var i = 0; i < post.length; i++){
             if(newPost.length <= 5){
                 newPost.push(post[i]);
