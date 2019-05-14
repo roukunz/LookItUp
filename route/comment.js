@@ -43,6 +43,8 @@ router.post("/:comment/like", middleware.isLoggedIn, function(req,res){
                         user.save();
                         comment.rating +=1;
                         comment.save();
+                        res.redirect("back");
+           
                     } else {
                         res.redirect("back");
                     }
@@ -61,10 +63,11 @@ router.post("/:comment/like", middleware.isLoggedIn, function(req,res){
                 }
                 user.ratedComment.push(newRate);
                 user.save();
+                res.redirect("back");
+           
             }
 
-            res.redirect("back");
-           
+            
         })
     })
 })
@@ -82,6 +85,7 @@ router.post("/:comment/dislike",middleware.isLoggedIn, function(req,res){
                         user.save();
                         comment.rating -=1;
                         comment.save();
+                        res.redirect("back");
 
                     } else {
                         res.redirect("back");
@@ -101,9 +105,10 @@ router.post("/:comment/dislike",middleware.isLoggedIn, function(req,res){
                 }
                 user.ratedComment.push(newRate);
                 user.save();
+                
+            res.redirect("back");
             }
 
-            res.redirect("back");
            
         })
     })
