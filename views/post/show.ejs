@@ -11,7 +11,7 @@
                                 <% for(var y = 0; y < user_rate.length; y++){ %>
                                     <% if(user_rate[y].post._id.toString() == post._id.toString()){ %>
                                             <% if(user_rate[y].like){ %>
-                                                <i class="fas fa-circle"></i> 
+                                                <i class="fas fa-caret-up grey-color"></i> 
                                                 <% found = true; %>
                                             <% } %>
                                     <% } %>
@@ -32,7 +32,7 @@
                             <% for(var y = 0; y < user_rate.length; y++){ %>
                                 <% if(user_rate[y].post._id.toString() == post._id.toString()){ %>
                                         <% if(!user_rate[y].like){ found = true; %>
-                                            <i class="fas fa-circle"></i> 
+                                            <i class="fas fa-caret-down grey-color"></i> 
                                         <% } %>
                                 <% } %>
                             <% } %>
@@ -95,7 +95,7 @@
                                             <% for(var y = 0; y < user_comment_rate.length; y++){ %>
                                                 <% if(user_comment_rate[y].comment._id.toString() == post.comment[i]._id.toString()){ %>
                                                         <% if(user_comment_rate[y].like){found = true; %>
-                                                            <i class="fas fa-circle"></i> 
+                                                            <i class="fas fa-caret-up grey-color"></i> 
                                                         <% } %>
                                                 <% } %>
                                             <% } %>
@@ -112,7 +112,7 @@
                                         <% for(var y = 0; y < user_comment_rate.length; y++){ %>
                                             <% if(user_comment_rate[y].comment._id.toString() == post.comment[i]._id.toString()){ %>
                                                     <% if(!user_comment_rate[y].like){ found = true; %>
-                                                        <i class="fas fa-circle"></i> 
+                                                        <i class="fas fa-caret-down grey-color"></i> 
                                                     <% } %>
                                             <% } %>
                                         <% } %>
