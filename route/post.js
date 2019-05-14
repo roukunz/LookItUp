@@ -85,7 +85,7 @@ router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
             user.ratedPost.every(function(r,i){
                 if(r.post._id.toString() == post._id.toString()){
                     found = true;
-                    if(!r.like){
+                    if(r.like){
                         post.rating -=1;
                         post.save();
                         user.ratedPost.splice(i,1);
