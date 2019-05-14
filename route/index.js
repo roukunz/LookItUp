@@ -9,28 +9,14 @@ router.get('/', function(req,res){
     var lastFound;
     var newPost = [];
     Post.find({}).populate("category").exec( function(err, post){
-        for(var i = 0; i < post.length; i++){
-            if(newPost.length <= 4){
-                newPost.push(post[i]);
-            } else {
-                lastFound = post[i];
-                var temp;
-                for(var y = 0; y < newPost.length; y++){
-                    if(post[i].rating > newPost[y].rating){
-                        temp = newPost[y];
-                        newPost[y] = lastFound;
-                        lastFound = temp;
-                    }
-                }
-            }  
-        }
+        post.sort(compare);
         console.log("newpost that the player is getting: " + newPost);
         if(req.user){
             User.findOne({_id: req.user.id}, function(err,user){
                 res.render("index", {topPost: newPost, user: user});
             })
         } else {
-            res.render("index", {topPost: newPost});
+            res.render("index", {topPost: post});
         }
     })
 })
@@ -104,4 +90,16 @@ router.post('/search', function(req,res){
 router.get('*', function(req,res){
     res.redirect("/");
 })
+
+
+function compare( a, b ) {
+    if ( a.rating < b.rating ){
+      return -1;
+    }
+    if ( a.rating > b.rating ){
+      return 1;
+    }
+    return 0;
+  }
+
 module.exports = router;
