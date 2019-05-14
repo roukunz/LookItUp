@@ -103,7 +103,7 @@ router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
             if(!found){
                 var dataSend = {
                     post: post, 
-                    like: true
+                    like: false
                 }
                 user.ratedPost.push(dataSend);
                 post.rating -= 1;
