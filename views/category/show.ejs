@@ -16,9 +16,8 @@
                                         <% var found; %>
                                         <% for(var y = 0; y < user_rate.length; y++){ %>
                                             <% if(user_rate[y].post._id.toString() == category.post[i]._id.toString()){ %>
-                                                    <% if(user_rate[y].like){ %>
+                                                    <% if(user_rate[y].like){ found = true;%>
                                                         <i class="fas fa-circle"></i> 
-                                                        <% found = true; %>
                                                     <% } %>
                                             <% } %>
                                         <% } %>
