@@ -24,7 +24,7 @@ router.get('/', function(req,res){
                 }
             }  
         }
-        console.log(newPost);
+        console.log("newpost that the player is getting: " + newPost);
         if(req.user){
             User.findOne({_id: req.user.id}, function(err,user){
                 res.render("index", {topPost: newPost, user: user});
