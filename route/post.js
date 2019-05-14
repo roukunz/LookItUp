@@ -60,7 +60,7 @@ router.post('/:title/like', middleware.isLoggedIn, function(req,res){
             })
 
             user.ratedPost.every(function(r,i){
-                if(post._id.toString() == r._id.toString()){
+                if(post._id.toString() == r.post._id.toString()){
                     user.ratedPost.splice(i,1);
                     user.save();
                 }
@@ -124,7 +124,7 @@ router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
             })
 
             user.ratedPost.every(function(r,i){
-                if(r._id.toString() == post._id.toString()){
+                if(r.post._id.toString() == post._id.toString()){
                     user.ratedPost.splice(y,1);
                     user.save();
                 }
@@ -133,7 +133,6 @@ router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
               //if they click again, or they didnt rate yet, dislike
             if(!found){
                 post.dislike.every(function(d){
-                  
                     if(user._id.toString() == d._id.toString()){
                         found = true;
                         console.log("here");
