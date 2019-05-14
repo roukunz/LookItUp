@@ -14,8 +14,8 @@
                     <input type="text" class="form-control" name="title"  value="<%= post.title%>">
                 </div>
                 <div class="form-group">
-                    <label for="post[content]">Content</label> <br>
-                    <textarea id="post[content]" name="content" rows="5" cols="33" class="full-content"><%= post.content%></textarea>
+                    <label for="txtArea">Content</label> <br>
+                    <textarea id="txtArea" onkeypress="onTextChange('txtArea')" name="content" rows="5" cols="33" class="full-content"><%= post.content%></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mb-2 full-content">EDIT POST</button>
