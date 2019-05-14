@@ -130,7 +130,7 @@
                                 <!-- header: username rating date -->
                                 <div class="">
                                     <small><%= post.comment[i].author.username%></small> <small class="text-muted"><%= post.comment[i].rating %> points</small> <small><span id="date<%= i%>"> 10 minutes</span><script>timeDifference('<%= post.comment[i].date%>', '<%= i %>')</script> ago</small>
-                                    <p><%= post.comment[i].comment %></p>
+                                    <p><%- post.comment[i].comment %></p>
 
                                     <% if(currentUser) { %>
                                     <button class="btn btn-outline-success btn-sm pt-0 uniqueForm" onclick="showDiv('reply<%= i%>')">Reply</button>
@@ -162,7 +162,7 @@
                                                 <!-- header: username rating date -->
                                                 <div class="">
                                                     <small><%= post.comment[i].reply[y].author.username %></small> <small class="text-muted"><%= post.comment[i].reply[y].rating%></small> <small><span id="date<%= i%>00<%= y%>"> 10 minutes</span><script>timeDifference('<%= post.comment[i].reply[y].date%>', '<%= i %>00<%= y%>')</script> ago</small>
-                                                    <p><%= post.comment[i].reply[y].reply %></p>
+                                                    <p><%- post.comment[i].reply[y].reply %></p>
                                                         <%if (currentUser){ %>
                                                             <% if(user.username == post.comment[i].reply[y].author.username){ %>
                                                                 <button class="btn btn-outline-success btn-sm pt-0 uniqueForm" onclick="showDiv('edit<%= i%>00<%= y%>')">Edit</button>
