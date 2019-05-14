@@ -54,7 +54,9 @@ router.post('/:title/like', middleware.isLoggedIn, function(req,res){
                     } else {
                         res.redirect("back");
                     }
+                    return false;
                 }
+                return true;
             })
 
             if(!found){
@@ -91,7 +93,9 @@ router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
                     } else {
                         res.redirect("back");
                     }
+                    return false;
                 }
+                return true;
             })
 
             if(!found){
