@@ -175,7 +175,7 @@
                                                         
                                                         <div id="edit<%= i%>00<%= y%>"  style="display:none;" class="pt-2"> 
                                                                 <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/<%=post.comment[i].reply[y]._id%>?_method=PUT" method="POST">
-                                                                    <textarea rows="4" cols="50" class="full-content" name="reply"><%= post.comment[i].reply[y] %></textarea>
+                                                                    <textarea rows="4" cols="50" class="full-content" name="reply"><%= post.comment[i].reply[y].reply %></textarea>
                                                                     <button class="btn btn-outline-success btn-sm" type="submit">Submit</button>
                                                                 </form>
                                                             </div>
