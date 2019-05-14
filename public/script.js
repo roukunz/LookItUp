@@ -13,11 +13,7 @@ function openPostTab(evt, postType) {
 
 function timeDifference(fromdate, id) {	
   var date = new Date(fromdate);
-  var diff = new Date().getTime() - date.getTime();	
-  console.log("ToDate : " + new Date());
-  console.log(fromdate);
-  console.log("From Date: " + date);
-  console.log("difference : " + diff );
+  var diff = new Date().getTime() - date.getTime();
   var divideBy;
   var textDisplay;
   if(diff > 1000){

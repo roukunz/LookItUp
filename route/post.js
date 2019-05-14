@@ -129,8 +129,6 @@ router.get("/:title", function(req,res){
         }).exec(function(err,post){
             if(req.user){
                 User.findOne({username: req.user.username}).exec(function(err,user){
-                    console.log(user._id);
-                    console.log(post.author.id);
                     res.render("post/show", {post: post, user: user, user_rate: user.ratedPost, user_comment_rate: user.ratedComment, category: category});
                 })
             } else {

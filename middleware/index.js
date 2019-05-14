@@ -6,7 +6,7 @@ var Reply = require("../models/reply");
 
 middlewareObj.checkPostAuthor = function(req,res,next){
     if(req.isAuthenticated()){
-        Post.findOne({title: req.params.title},function(err, foundPost){
+        Post.findOne({_id: req.params.title},function(err, foundPost){
             if(err){
                 res.redirect("back") 
                 }else {
