@@ -16,7 +16,7 @@ router.get('/', function(req,res){
                 lastFound = post[i];
                 var temp;
                 for(var y = 0; y < newPost.length; y++){
-                    if(post[i].rating.length > newPost[y].rating.length){
+                    if(post[i].rating > newPost[y].rating){
                         temp = newPost[y];
                         newPost[y] = lastFound;
                         lastFound = temp;
