@@ -30,7 +30,7 @@
                                   
                                     
                                 </li>
-                                <li id="rating<%= category.post[i].title%>"><%= (category.post[i].rating.length - category.post[i].dislike.length) %></li>
+                                <li id="rating<%= category.post[i].title%>"><%= category.post[i].rating %></li>
                                 <li>
                                 <% if(currentUser){ %>
                                     <% var found = false; %>

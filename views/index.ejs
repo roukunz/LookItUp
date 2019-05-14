@@ -28,7 +28,7 @@
                                         <form action="/l/<%= topPost[i].category.name%>/post/<%= topPost[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                                     <% } %>
                                 </li>
-                                <li><%= (topPost[i].rating.length - topPost[i].dislike.length) %></li>
+                                <li><%= topPost[i].rating %></li>
                                 <li>
                                 <% if(currentUser){ %>
                                     <% var found = false; %>

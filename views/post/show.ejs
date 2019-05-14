@@ -25,7 +25,7 @@
                           
                             
                         </li>
-                        <li id="rating<%= post.title%>"><%= (post.rating.length - post.dislike.length) %></li>
+                        <li id="rating<%= post.title%>"><%= post.rating %></li>
                         <li>
                         <% if(currentUser){ %>
                             <% var found = false; %>

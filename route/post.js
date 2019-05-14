@@ -39,125 +39,77 @@ router.post('/', middleware.isLoggedIn, function(req,res){
 router.post('/:title/like', middleware.isLoggedIn, function(req,res){
     User.findOne({username: req.user.username},function(err,user){
         Post.findOne({title: req.params.title}, function(err ,post){
+            
             var found;
-            post.dislike.every(function(d,i){
-                if(user._id.toString() == d._id.toString()){
-                    found = true;
-                    user.ratedPost.every(function(r,y){
-                        console.log(r.post._id);
-                        if(r.post._id.toString() == post._id.toString()){
-                            
-                            user.ratedPost.splice(y,1);
-                            user.save();
-                        }
-                    })
-                    post.dislike.splice(i,1);
-                    post.save();
-                    res.redirect("back");
-                    return false;
-                }
-                return true;
-            })
-
+            //check if user has rated
             user.ratedPost.every(function(r,i){
-                if(post._id.toString() == r.post._id.toString()){
-                    user.ratedPost.splice(i,1);
-                    user.save();
+                if(r.post._id.toString() == post._id.toString()){
+                    found = true;
+                    if(!r.like){
+                        post.rating +=1;
+                        post.save();
+                        user.ratedPost.splice(i,1);
+                        user.save();
+                    } else {
+                        res.redirect("back");
+                    }
                 }
             })
 
             if(!found){
-                post.rating.every(function(p){
-                    if(user._id.toString() == p._id.toString()){
-                        res.redirect("back");
-                        found = true;
-                        return false;
-                    }
-                    return true;
-                })
-            }
-
-            if(!found){    
                 var dataSend = {
                     post: post, 
                     like: true
                 }
                 user.ratedPost.push(dataSend);
-                post.rating.push(req.user._id);
+                post.rating += 1;
                 post.save();
                 user.save();
-                res.redirect("back");
             }
-            
-
+            //if he has, remove it
+            //if he hasnt, add it
+            //add rating
         })
     })
 })
 
 router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
-    var found = false;
-    //check if they like
     User.findOne({username: req.user.username},function(err,user){
         Post.findOne({title: req.params.title}, function(err ,post){
             
-
-            post.rating.every(function(p,i){
-                if(user._id.toString() == p._id.toString()){
-                    //if they do, delete their like
-                    user.ratedPost.every(function(r,y){
-                        if(r.post._id.toString() == post._id.toString()){
-                            user.ratedPost.splice(y,1);
-                            user.save();
-                            console.log(user.ratedPost[y]);
-                        }
-                    })
-
-                    post.rating.splice(i,1);
-                    post.save();
-
-                  
-                    found = true;
-                    res.redirect("back");
-                    return false;
-                }
-                return true;
-            })
-
+            var found;
+            //check if user has rated
             user.ratedPost.every(function(r,i){
                 if(r.post._id.toString() == post._id.toString()){
-                    user.ratedPost.splice(y,1);
-                    user.save();
+                    found = true;
+                    if(!r.like){
+                        post.rating -=1;
+                        post.save();
+                        user.ratedPost.splice(i,1);
+                        user.save();
+                    } else {
+                        res.redirect("back");
+                    }
                 }
             })
-
-              //if they click again, or they didnt rate yet, dislike
-            if(!found){
-                post.dislike.every(function(d){
-                    if(user._id.toString() == d._id.toString()){
-                        found = true;
-                        console.log("here");
-                        res.redirect("back");
-                        return false;
-                    }
-                    return true;
-                })
-            }
 
             if(!found){
                 var dataSend = {
                     post: post, 
-                    like: false
+                    like: true
                 }
                 user.ratedPost.push(dataSend);
-                user.save();
-                post.dislike.push(user._id);
+                post.rating -= 1;
                 post.save();
-                res.redirect('back');
+                user.save();
             }
-            
-            })
+            //if he has, remove it
+            //if he hasnt, add it
+            //add rating
         })
     })
+})
+
 
 router.get("/:title", function(req,res){
     Category.findOne({name: req.params.id}, function(err,category){
