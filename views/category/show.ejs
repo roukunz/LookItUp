@@ -54,7 +54,7 @@
                         <div class="col-sm-11 post">
                             <p>posted by <%= category.post[i].author.username %> <span id="date<%= i%>"> 10 minutes</span><script>timeDifference('<%= category.post[i].date%>', '<%= i %>')</script> ago</p>
                             <h1><%= category.post[i].title%></h1>
-                            <p><%= category.post[i].content%></p>
+                            <p><%- category.post[i].content%></p>
                             <a href="/l/<%= category.name%>/post/<%= category.post[i].title%>">Comment</a>
                         </div>
                     </div>
