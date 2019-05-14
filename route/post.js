@@ -131,9 +131,6 @@ router.get("/:title", function(req,res){
             post.comment.sort(compare);
             if(req.user){
                 User.findOne({username: req.user.username}).exec(function(err,user){
-                    console.log(user.ratedComment[0]);
-                    console.log(user.ratedComment[0]._id);
-                    console.log(user.ratedComment[0].comment._id);
                     res.render("post/show", {post: post, user: user, user_rate: user.ratedPost, user_comment_rate: user.ratedComment, category: category});
                 })
             } else {
