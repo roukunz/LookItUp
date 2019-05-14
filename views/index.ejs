@@ -31,7 +31,7 @@
                                 <li><%= topPost[i].rating %></li>
                                 <li>
                                 <% if(currentUser){ %>
-                                    <% var found = false; %>
+                                    <% var found; %>
                                     <% for(var y = 0; y < user.ratedPost.length; y++){ %>
                                         <% if(user.ratedPost[y].post._id.toString() == topPost[i]._id.toString()){ %>
                                                 <% if(!user.ratedPost[y].like){ found = true; %>
