@@ -38,14 +38,12 @@ router.post("/:comment/like", middleware.isLoggedIn, function(req,res){
             user.ratedComment.every(function(c,i){
                 if(c.comment._id.toString() == comment._id.toString()){
                     found = true;
-                    if(c.like){
-                        res.redirect("back");
-                    } else {
+                    if(!c.like){
                         user.ratedComment.splice(i,1);
                         user.save();
                         comment.rating +=1;
                         comment.save();
-
+                    } else {
                         res.redirect("back");
                     }
                     return false;
@@ -79,14 +77,13 @@ router.post("/:comment/dislike",middleware.isLoggedIn, function(req,res){
             user.ratedComment.every(function(c,i){
                 if(c.comment._id.toString() == comment._id.toString()){
                     found = true;
-                    if(!c.like){
-                        res.redirect("back");
-                    } else {
+                    if(c.like){
                         user.ratedComment.splice(i,1);
                         user.save();
                         comment.rating -=1;
                         comment.save();
 
+                    } else {
                         res.redirect("back");
                     }
                     return false;
