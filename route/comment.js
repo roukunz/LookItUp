@@ -10,7 +10,7 @@ var Reply = require("../models/reply")
 
 //only content is sent
 router.post("/", middleware.isLoggedIn, function(req,res){
-    Post.findOne({title: req.params.title}, function(err,post){
+    Post.findOne({_id: req.params.title}, function(err,post){
         var comment = new Comment({
             "comment" : req.body.comment,
             "author" : {

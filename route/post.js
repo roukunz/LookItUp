@@ -39,7 +39,7 @@ router.post('/', middleware.isLoggedIn, function(req,res){
 
 router.post('/:title/like', middleware.isLoggedIn, function(req,res){
     User.findOne({username: req.user.username},function(err,user){
-        Post.findOne({title: req.params.title}, function(err ,post){
+        Post.findOne({_id: req.params.title}, function(err ,post){
             
             var found;
             //check if user has rated
@@ -80,7 +80,7 @@ router.post('/:title/like', middleware.isLoggedIn, function(req,res){
 
 router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
     User.findOne({username: req.user.username},function(err,user){
-        Post.findOne({title: req.params.title}, function(err ,post){
+        Post.findOne({_id: req.params.title}, function(err ,post){
             
             var found;
             //check if user has rated
@@ -122,7 +122,7 @@ router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
 
 router.get("/:title", function(req,res){
     Category.findOne({name: req.params.id}, function(err,category){
-        Post.findOne({title: req.params.title}).populate({
+        Post.findOne({_id: req.params.title}).populate({
             path: 'comment',
             model: 'Comment',
             populate:{path: 'reply', model:"Reply"}  
@@ -142,7 +142,7 @@ router.get("/:title", function(req,res){
 
 router.get('/:title/edit', middleware.isLoggedIn, function(req,res){
     Category.findOne({name: req.params.id}, function(err,category){
-        Post.findOne({title: req.params.title}, function(err,post){
+        Post.findOne({_id: req.params.title}, function(err,post){
 
             res.render("post/edit", {post: post, category: category});
         })
@@ -151,7 +151,7 @@ router.get('/:title/edit', middleware.isLoggedIn, function(req,res){
 })
 
 router.put('/:title', middleware.checkPostAuthor, function(req,res){
-    Post.findOne({title: req.params.title}, function(err, post){
+    Post.findOne({_id: req.params.title}, function(err, post){
         if(err){
             console.log(err);
         } else {
@@ -164,7 +164,7 @@ router.put('/:title', middleware.checkPostAuthor, function(req,res){
 })
 
 router.delete("/:title", middleware.checkPostAuthor, function(req,res){
-    Post.findOne({title: req.params.title}).populate({path: 'comment',
+    Post.findOne({_id: req.params.title}).populate({path: 'comment',
     model: 'Comment',
     populate:{path: 'reply', model:"Reply"}  }).exec( function(err,post){
         for(var i = 0; i < post.comment.length; i++){
