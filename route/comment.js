@@ -34,93 +34,81 @@ router.post("/:comment/like", middleware.isLoggedIn, function(req,res){
     Comment.findOne({_id: req.params.comment}, function(err,comment){
         User.findOne({_id: req.user._id}).exec(function(err,user){
             var found = false;
-            //if user dislike, remove dislike
-            console.log("rated comment's legnth : " + user.ratedComment.length);
-            user.ratedComment.every(function(r,i){
-                console.log(r._id);
-                console.log(comment._id);
-                if(r._id.toString() == comment._id.toString()){
-                    
-                    //if the player liked already
-                    if(r.like){
-                        console.log("LIke");
+
+            user.ratedComment.every(function(c,i){
+                if(c.comment._id.toString() == comment._id.toString()){
+                    found = true;
+                    if(c.like){
                         res.redirect("back");
-                        found = true;
-                        return false;
                     } else {
                         user.ratedComment.splice(i,1);
                         user.save();
-
-                        comment.rating += 1;
+                        comment.rating +=1;
                         comment.save();
 
                         res.redirect("back");
-                        found = true;
-                        return false
                     }
+                    return false;
                 }
                 return true;
-                
             })
 
-            console.log(found);
             if(!found){
-                comment.rating += 1;
+                comment.rating +=1;
                 comment.save();
 
                 var newRate = {
-                    "_id": comment._id,
+                    "comment" : comment,
                     "like": true
                 }
                 user.ratedComment.push(newRate);
                 user.save();
-
-                res.redirect("back");
             }
+
+            res.redirect("back");
+           
         })
     })
 })
 
 router.post("/:comment/dislike",middleware.isLoggedIn, function(req,res){
     Comment.findOne({_id: req.params.comment}, function(err,comment){
-        User.findOne({username: req.user.username}).exec(function(err,user){
+        User.findOne({_id: req.user._id}).exec(function(err,user){
             var found = false;
-            //if user dislike, remove dislike
-            user.ratedComment.every(function(r,i){
-                if(!found){
-                    if(r._id.toString() == comment._id.toString()){
-                        //if the player liked already
-                        if(!r.like){
-                            res.redirect("back");
-                            found = true;
-                        } else {
-                            user.ratedComment.splice(i,1);
-                            user.save();
 
-                            comment.rating -= 1;
-                            comment.save();
+            user.ratedComment.every(function(c,i){
+                if(c.comment._id.toString() == comment._id.toString()){
+                    found = true;
+                    if(!c.like){
+                        res.redirect("back");
+                    } else {
+                        user.ratedComment.splice(i,1);
+                        user.save();
+                        comment.rating -=1;
+                        comment.save();
 
-                            res.redirect("back");
-                            found = true;
-                        }
+                        res.redirect("back");
                     }
+                    return false;
                 }
+                return true;
             })
 
             if(!found){
-                comment.rating -= 1;
+                comment.rating -=1;
                 comment.save();
 
-                var newRate={
-                    "_id": comment._id,
-                    "like": false
+                var newRate = {
+                    "comment" : comment,
+                    "like": true
                 }
                 user.ratedComment.push(newRate);
                 user.save();
-
-                res.redirect("back");
             }
-        }) 
+
+            res.redirect("back");
+           
+        })
     })
 })
 
