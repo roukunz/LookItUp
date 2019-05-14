@@ -194,8 +194,16 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-2">
-            kajdfkajdflkaj
+        <div class="hidden-sm col-md-2">
+                <% if(currentUser){ %>
+                <div class=" content pl-0 pr-0">
+                    <div class="post pl-2 pr-2 pt-2 pb-2">
+                        <h5><%= category.name%></h5>
+                        <p><%- category.description%></p>
+                        <a href="/l/<%= category.name%>/post/post.title/new%>"><button type="submit" class="btn btn-primary mb-2 full-content">CREATE POST</button></a>
+                    </div>
+                </div>
+                <% } %>
         </div>
 
     </div>
