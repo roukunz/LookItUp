@@ -31,14 +31,14 @@
                         </li>
                       </ul>
                       <span class="navbar-text">
-                            <ul class="navbar-nav ml-auto">
+                            <ul class="navbar-nav">
                 
                                     <% if(!currentUser){ %>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/login">Login</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/register" tabindex="-1" aria-disabled="true">  Register</a>
+                                            <a class="nav-link navbar-text" href="/register" tabindex="-1" aria-disabled="true">  Register</a>
                                         </li>
                                     <% } else { %>
                                         <li class="mr-3">Signed In: <%= currentUser.username%></li>
