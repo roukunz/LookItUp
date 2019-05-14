@@ -10,7 +10,7 @@ router.get('/', function(req,res){
     var newPost = [];
     Post.find({}).populate("category").exec( function(err, post){
         for(var i = 0; i < post.length; i++){
-            if(newPost.length <= 5){
+            if(newPost.length <= 4){
                 newPost.push(post[i]);
             } else {
                 lastFound = post[i];
@@ -30,7 +30,6 @@ router.get('/', function(req,res){
                 res.render("index", {topPost: newPost, user: user});
             })
         } else {
-            console.log(newPost.length);
             res.render("index", {topPost: newPost});
         }
     })
