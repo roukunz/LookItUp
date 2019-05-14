@@ -48,7 +48,7 @@
                 <div class="col-md-11">
                     <small>post by <%= post.author.username %></small><small class="text-muted"> <span id="date9999"> 10 minutes</span><script>timeDifference('<%= post.date%>', '9999')</script> ago</small>
                     <h1><%= post.title%></h1>
-                    <p><%- post.content%></p>
+                    <p><%- xssFilters.inHTMLData(post.content)%></p>
 
                     <% if(currentUser){ %>
                         <% if(user._id.toString() == post.author.id.toString()){ %>

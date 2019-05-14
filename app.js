@@ -6,6 +6,7 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     flash = require("connect-flash"),
     User = require("./models/user"),
+    xssFilters = require("xss-filters"),
     Category = require("./models/category");
 
 
