@@ -22,15 +22,15 @@
                                             <% } %>
                                         <% } %>
                                         <% if(!found){ %>
-                                            <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                            <form action="/l/<%= category.name%>/post/<%=category.post[i]._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                                          <% } %>
                                     <% } else { %>
-                                        <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                        <form action="/l/<%= category.name%>/post/<%=category.post[i]._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                                     <% } %>
                                   
                                     
                                 </li>
-                                <li id="rating<%= category.post[i].title%>"><%= category.post[i].rating %></li>
+                                <li id="rating<%= category.post[i]._id%>"><%= category.post[i].rating %></li>
                                 <li>
                                 <% if(currentUser){ %>
                                     <% var found = false; %>
@@ -42,10 +42,10 @@
                                         <% } %>
                                     <% } %>
                                     <% if(!found){ %>
-                                        <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                        <form action="/l/<%= category.name%>/post/<%=category.post[i]._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
                                      <% } %>
                                 <% } else { %>
-                                    <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                    <form action="/l/<%= category.name%>/post/<%=category.post[i]._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
                                 <% } %>
                             </li>
                             </ul>

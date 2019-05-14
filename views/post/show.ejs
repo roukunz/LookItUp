@@ -17,15 +17,15 @@
                                     <% } %>
                                 <% } %>
                                 <% if(!found){ %>
-                                    <form action="/l/<%= category.name%>/post/<%= post.title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                    <form action="/l/<%= category.name%>/post/<%= post._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                                  <% } %>
                             <% } else { %>
-                                <form action="/l/<%= category.name%>/post/<%= post.title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                <form action="/l/<%= category.name%>/post/<%= post._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                             <% } %>
                           
                             
                         </li>
-                        <li id="rating<%= post.title%>"><%= post.rating %></li>
+                        <li id="rating<%= post._id%>"><%= post.rating %></li>
                         <li>
                         <% if(currentUser){ %>
                             <% var found = false; %>
@@ -37,10 +37,10 @@
                                 <% } %>
                             <% } %>
                             <% if(!found){ %>
-                                <form action="/l/<%= category.name%>/post/<%= post.title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                <form action="/l/<%= category.name%>/post/<%= post._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
                              <% } %>
                         <% } else { %>
-                            <form action="/l/<%= category.name%>/post/<%= post.title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                            <form action="/l/<%= category.name%>/post/<%= post._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
                         <% } %>
                     </li>
                     </ul>
@@ -53,10 +53,10 @@
                     <% if(currentUser){ %>
                         <% if(user._id.toString() == post.author.id.toString()){ %>
                             <div class="pb-5">
-                            <form action="/l/<%=category.name%>/post/<%=post.title%>/edit" method="GET">                                
+                            <form action="/l/<%=category.name%>/post/<%=post._id%>/edit" method="GET">                                
                                 <button class="btn btn-outline-success my-2 my-sm-0 uniqueForm" type="submit">Edit</button>
                             </form>
-                            <form action="/l/<%=category.name%>/post/<%=post.title%>?_method=DELETE" method="POST">                                
+                            <form action="/l/<%=category.name%>/post/<%=post._id%>?_method=DELETE" method="POST">                                
                                 <button class="btn btn-outline-success my-2 my-sm-0 uniqueForm"  type="submit">Delete</button>
                             </form>
                             </div>
@@ -69,7 +69,7 @@
                             <a href="/register"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Register</button></a>
                         </div>
                     <% } else { %>
-                        <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/" method="POST">
+                        <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/" method="POST">
                             <textarea rows="4" cols="50" class="full-content" name="comment"></textarea>
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
                         </form>
@@ -100,10 +100,10 @@
                                                 <% } %>
                                             <% } %>
                                             <% if(!found){ %>
-                                                <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                                <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                                              <% } %>
                                         <% } else { %>
-                                            <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
+                                            <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                                         <% } %>
                                     </li>
                                     <li>
@@ -117,10 +117,10 @@
                                             <% } %>
                                         <% } %>
                                         <% if(!found){ %>
-                                            <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                            <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
                                          <% } %>
                                     <% } else { %>
-                                        <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
+                                        <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
                                     <% } %>
                                 </li>
                                 </ul>
@@ -135,18 +135,18 @@
                                     <button class="btn btn-outline-success btn-sm pt-0 uniqueForm" onclick="showDiv('reply<%= i%>')">Reply</button>
                                     <% if(user.username == post.comment[i].author.username){ %>
                                     <button class="btn btn-outline-success btn-sm pt-0 uniqueForm" onclick="showDiv('edit<%= i%>')">Edit</button>
-                                    <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>?_method=DELETE" method="POST">
+                                    <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>?_method=DELETE" method="POST">
                                         <button class="btn btn-outline-success btn-sm pt-0 pb-1 uniqueForm">Delete</button></form>
                                     <% } %>
                                     <% } %>
                                     <div id="reply<%= i%>"  style="display:none;" class="pt-2"> 
-                                        <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>" method="POST">
+                                        <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>" method="POST">
                                             <textarea rows="4" cols="50" class="full-content" name="reply"></textarea>
                                             <button class="btn btn-outline-success btn-sm" type="submit">Submit</button>
                                         </form>
                                     </div>
                                     <div id="edit<%= i%>"  style="display:none;" class="pt-2"> 
-                                        <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>?_method=PUT" method="POST">
+                                        <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>?_method=PUT" method="POST">
                                             <textarea rows="4" cols="50" class="full-content" name="comment"><%= post.comment[i].comment %></textarea>
                                             <button class="btn btn-outline-success btn-sm" type="submit">Submit</button>
                                         </form>
@@ -165,7 +165,7 @@
                                                         <%if (currentUser){ %>
                                                             <% if(user.username == post.comment[i].reply[y].author.username){ %>
                                                                 <button class="btn btn-outline-success btn-sm pt-0 uniqueForm" onclick="showDiv('edit<%= i%>00<%= y%>')">Edit</button>
-                                                                <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/<%=post.comment[i].reply[y]._id%>?_method=DELETE" method="POST">
+                                                                <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>/<%=post.comment[i].reply[y]._id%>?_method=DELETE" method="POST">
                                                                         <button class="btn btn-outline-success btn-sm pt-0 uniqueForm">Delete</button>
                                                                 </form>
                                                             <% } %>
@@ -174,7 +174,7 @@
                                                         
                                                         
                                                         <div id="edit<%= i%>00<%= y%>"  style="display:none;" class="pt-2"> 
-                                                                <form action="/l/<%= category.name%>/post/<%= post.title%>/comment/<%= post.comment[i]._id%>/<%=post.comment[i].reply[y]._id%>?_method=PUT" method="POST">
+                                                                <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>/<%=post.comment[i].reply[y]._id%>?_method=PUT" method="POST">
                                                                     <textarea rows="4" cols="50" class="full-content" name="reply"><%= post.comment[i].reply[y].reply %></textarea>
                                                                     <button class="btn btn-outline-success btn-sm" type="submit">Submit</button>
                                                                 </form>
@@ -199,7 +199,7 @@
                     <div class="post pl-2 pr-2 pt-2 pb-2">
                         <h5><%= category.name%></h5>
                         <p><%- category.description%></p>
-                        <a href="/l/<%= category.name%>/post/post.title/new%>"><button type="submit" class="btn btn-primary mb-2 full-content">CREATE POST</button></a>
+                        <a href="/l/<%= category.name%>/post/post._id/new%>"><button type="submit" class="btn btn-primary mb-2 full-content">CREATE POST</button></a>
                     </div>
                 </div>
                 <% } %>
