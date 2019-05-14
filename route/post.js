@@ -68,6 +68,7 @@ router.post('/:title/like', middleware.isLoggedIn, function(req,res){
                 post.rating += 1;
                 post.save();
                 user.save();
+                res.redirect("back");
             }
             //if he has, remove it
             //if he hasnt, add it
@@ -107,6 +108,7 @@ router.post('/:title/dislike', middleware.isLoggedIn,function(req,res){
                 post.rating -= 1;
                 post.save();
                 user.save();
+                res.redirect("back");
             }
             //if he has, remove it
             //if he hasnt, add it
