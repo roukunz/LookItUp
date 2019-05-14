@@ -127,6 +127,7 @@ router.get("/:title", function(req,res){
             model: 'Comment',
             populate:{path: 'reply', model:"Reply"}  
         }).exec(function(err,post){
+            post.comment.sort(compare);
             if(req.user){
                 User.findOne({username: req.user.username}).exec(function(err,user){
                     res.render("post/show", {post: post, user: user, user_rate: user.ratedPost, user_comment_rate: user.ratedComment, category: category});
@@ -181,4 +182,15 @@ router.delete("/:title", middleware.checkPostAuthor, function(req,res){
     res.redirect("/l/"+ req.params.id);
 
 })
+
+function compare( a, b ) {
+    if ( a.rating > b.rating ){
+      return -1;
+    }
+    if ( a.rating < b.rating ){
+      return 1;
+    }
+    return 0;
+  }
+
 module.exports = router;
