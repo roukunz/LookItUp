@@ -51,7 +51,7 @@
                         <div class="col-sm-11 post">
                             <p>posted by <%= topPost[i].author.username%>   <span id="date<%= i%>">    10 minutes</span><script>timeDifference('<%= topPost[i].date%>', '<%= i %>')</script> ago  <a href="/l/<%= topPost[i].category.name%>"><small class="text-muted"> /l/<%= topPost[i].category.name%></small></small></a></p>
                             <h1><%= topPost[i].title %></h1>
-                            <p><%= topPost[i].content %></p>
+                            <p><%- topPost[i].content %></p>
                             <a href="/l/<%= topPost[i].category.name%>/post/<%= topPost[i].title%>">Comment</a>
                         </div>
                    
@@ -67,7 +67,7 @@
                     <div class="post pl-2 pr-2 pt-2 pb-2">
                         <h5>Home</h5>
                         <p>Your pesonal reddit homepage</p>
-                        <a href="/post/new"><button type="submit" class="btn btn-primary mb-2 full-content">CREATE POST</button></a>
+                        <!-- <a href="/post/new"><button type="submit" class="btn btn-primary mb-2 full-content">CREATE POST</button></a> -->
                         <a href="/l/new"><button type="submit" class="btn btn-primary full-content">CREATE COMMUNITY</button></a>
                     </div>
                 </div>
