@@ -101,7 +101,7 @@ router.post("/:comment/dislike",middleware.isLoggedIn, function(req,res){
 
                 var newRate = {
                     comment : comment,
-                    like: true
+                    like: false
                 }
                 user.ratedComment.push(newRate);
                 user.save();
