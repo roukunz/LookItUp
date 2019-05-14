@@ -18,8 +18,6 @@
                                             <% if(user_rate[y].post._id.toString() == category.post[i]._id.toString()){ %>
                                                     <% if(user_rate[y].like){ found = true;%>
                                                         <i class="fas fa-circle"></i> 
-                                                    <% } else { %>
-                                                        <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/like" method="POST"> <button><i class="fas fa-caret-up"></i></button></form>
                                                     <% } %>
                                             <% } %>
                                         <% } %>
@@ -40,8 +38,6 @@
                                         <% if(user_rate[y].post._id.toString() == category.post[i]._id.toString()){ %>
                                                 <% if(!user_rate[y].like){ found = true; %>
                                                     <i class="fas fa-circle"></i> 
-                                                <% } else { %>
-                                                    <form action="/l/<%= category.name%>/post/<%=category.post[i].title%>/dislike" method="POST"> <button><i class="fas fa-caret-down"></i></button></form>
                                                 <% } %>
                                         <% } %>
                                     <% } %>
