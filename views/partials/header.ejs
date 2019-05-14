@@ -30,23 +30,21 @@
                             </form>
                         </li>
                       </ul>
-                      <span class="navbar-text">
-                            <ul class="navbar-nav">
-                
-                                    <% if(!currentUser){ %>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/login">Login</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link navbar-text" href="/register" tabindex="-1" aria-disabled="true">  Register</a>
-                                        </li>
-                                    <% } else { %>
-                                        <li class="mr-3">Signed In: <%= currentUser.username%></li>
-                                        <li><a href="/logout">Logout</a></li>
-                                    <% } %>
-                                
-                                </ul>
-                      </span>
+                      <ul class="navbar-nav">
+                        <% if(!currentUser){ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link navbar-text" href="/register" tabindex="-1" aria-disabled="true">  Register</a>
+                            </li>
+                        <% } else { %>
+                            <li class="mr-3">Signed In: <%= currentUser.username%></li>
+                            <li><a href="/logout">Logout</a></li>
+                        <% } %>
+                    
+                    </ul>
+                      
                     </div>
                   </nav>
         <div class="container pt-2">
