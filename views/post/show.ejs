@@ -70,7 +70,7 @@
                         </div>
                     <% } else { %>
                         <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/" method="POST">
-                            <textarea rows="4" cols="50" class="full-content" name="comment"></textarea>
+                            <textarea rows="4" cols="50" onkeypress="onTextChange('txtArea')" id="txtArea" class="full-content" name="comment"></textarea>
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
                         </form>
                     <% } %>
@@ -175,7 +175,7 @@
                                                         
                                                         <div id="edit<%= i%>00<%= y%>"  style="display:none;" class="pt-2"> 
                                                                 <form action="/l/<%= category.name%>/post/<%= post._id%>/comment/<%= post.comment[i]._id%>/<%=post.comment[i].reply[y]._id%>?_method=PUT" method="POST">
-                                                                    <textarea rows="4" cols="50" class="full-content" name="reply"><%= post.comment[i].reply[y].reply %></textarea>
+                                                                    <textarea rows="4" onkeypress="onTextChange('txtArea')" id="txtArea" cols="50" class="full-content" name="reply"><%= post.comment[i].reply[y].reply %></textarea>
                                                                     <button class="btn btn-outline-success btn-sm" type="submit">Submit</button>
                                                                 </form>
                                                             </div>
