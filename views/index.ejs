@@ -16,7 +16,7 @@
                                         <% for(var y = 0; y < user.ratedPost.length; y++){ %>
                                             <% if(user.ratedPost[y].post._id.toString() == topPost[i]._id.toString()){ %>
                                                     <% if(user.ratedPost[y].like){ %>
-                                                        <i class="fas fa-circle"></i> 
+                                                        <i class="fas fa-caret-up grey-color"></i> 
                                                         <% found = true; %>
                                                     <% } %>
                                             <% } %>
@@ -35,7 +35,7 @@
                                     <% for(var y = 0; y < user.ratedPost.length; y++){ %>
                                         <% if(user.ratedPost[y].post._id.toString() == topPost[i]._id.toString()){ %>
                                                 <% if(!user.ratedPost[y].like){ found = true; %>
-                                                    <i class="fas fa-circle"></i> 
+                                                    <i class="fas fa-caret-down grey-color"></i>
                                                 <% } %>
                                         <% } %>
                                     <% } %>

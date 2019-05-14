@@ -103,3 +103,7 @@ li form button{
 .uniqueForm{
     float:left;
 }
+
+.grey-color{
+    color: grey;
+}
