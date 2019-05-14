@@ -58,8 +58,8 @@ router.post("/:comment/like", middleware.isLoggedIn, function(req,res){
                 comment.save();
 
                 var newRate = {
-                    "comment" : comment,
-                    "like": true
+                    comment : comment,
+                    like: true
                 }
                 user.ratedComment.push(newRate);
                 user.save();
@@ -100,8 +100,8 @@ router.post("/:comment/dislike",middleware.isLoggedIn, function(req,res){
                 comment.save();
 
                 var newRate = {
-                    "comment" : comment,
-                    "like": true
+                    comment : comment,
+                    like: true
                 }
                 user.ratedComment.push(newRate);
                 user.save();
