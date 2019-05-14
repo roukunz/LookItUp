@@ -91,7 +91,7 @@
                                 <ul>
                                     <li>
                                         <% if(currentUser){ %>
-                                            <% var found; %>
+                                            <% var found = false; %>
                                             <% for(var y = 0; y < user_comment_rate.length; y++){ %>
                                                 <% if(user_comment_rate[y]._id.toString() == post.comment[i]._id.toString()){ %>
                                                         <% if(user_comment_rate[y].like){ %>
