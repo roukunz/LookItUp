@@ -127,9 +127,11 @@ router.get("/:title", function(req,res){
             model: 'Comment',
             populate:{path: 'reply', model:"Reply"}  
         }).exec(function(err,post){
+            console.log("this is the current category : " + category);
             post.comment.sort(compare);
             if(req.user){
                 User.findOne({username: req.user.username}).exec(function(err,user){
+                    console.log(user);
                     res.render("post/show", {post: post, user: user, user_rate: user.ratedPost, user_comment_rate: user.ratedComment, category: category});
                 })
             } else {
