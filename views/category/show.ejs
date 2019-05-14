@@ -13,7 +13,7 @@
                             <ul>
                                 <li>
                                     <% if(currentUser){ %>
-                                        <% var found; %>
+                                        <% var found = false; %>
                                         <% for(var y = 0; y < user_rate.length; y++){ %>
                                             <% if(user_rate[y].post._id.toString() == category.post[i]._id.toString()){ %>
                                                     <% if(user_rate[y].like){ found = true;%>
@@ -33,7 +33,7 @@
                                 <li id="rating<%= category.post[i].title%>"><%= category.post[i].rating %></li>
                                 <li>
                                 <% if(currentUser){ %>
-                                    <% var found; %>
+                                    <% var found = false; %>
                                     <% for(var y = 0; y < user_rate.length; y++){ %>
                                         <% if(user_rate[y].post._id.toString() == category.post[i]._id.toString()){ %>
                                                 <% if(!user_rate[y].like){ found = true; %>
