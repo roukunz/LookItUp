@@ -69,7 +69,7 @@ router.post('/:title/like', middleware.isLoggedIn, function(req,res){
             if(!found){
                 post.rating.every(function(p){
                     if(user._id.toString() == p._id.toString()){
-                        res.redirect("/l/"+req.params.id);
+                        res.redirect("back");
                         found = true;
                         return false;
                     }
