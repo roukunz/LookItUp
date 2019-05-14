@@ -54,6 +54,11 @@ router.post('/register', function(req,res){
         }
        
     })
+
+    if(req.body.password != req.body.password2){
+        req.flash("error","Password is not the same");
+        res.redirect("back");
+    }
     User.register(newUser,req.body.password, function(err,user){
         passport.authenticate("local")(req,res,function(){
             req.flash("success", "Welcome to Lookitup " + user.forum_name);
